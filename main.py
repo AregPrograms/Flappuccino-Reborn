@@ -44,11 +44,11 @@ def main():
     for i in range(3): buttons.append(Button())
     # now simply loading images based off of indexes in the list
     buttons[0].typeIndicatorSprite = pygame.image.load('data/gfx/flap_indicator.png')
-    buttons[0].price = 5   
+    buttons[0].price = 1   
     buttons[1].typeIndicatorSprite = pygame.image.load('data/gfx/speed_indicator.png')
-    buttons[1].price = 5 
+    buttons[1].price = 1 
     buttons[2].typeIndicatorSprite = pygame.image.load('data/gfx/beanup_indicator.png')
-    buttons[2].price = 30
+    buttons[2].price = 1
     # getting 5 beans
     for i in range(5): beans.append(Bean())
     # now looping through the beans list
@@ -229,7 +229,7 @@ def main():
                     pygame.mixer.Sound.play(upgradefx)
                     button.level += 1
                     beanCount -= button.price
-                    button.price = round(button.price*2.5)
+                    button.price = 1
                     if (buttons.index(button) == 0):
                         flapForce *= 1.5
                     if (buttons.index(button) == 1):
