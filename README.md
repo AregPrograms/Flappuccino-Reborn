@@ -1,5 +1,8 @@
 # flappuccino reborn
 
+![flappuccino](data/gfx/logo.png)
+
+
 Flappuccino Reborn is an edit of Flappuccino by Polymars created by AregPrograms and jasedxyz. <sup>for fun!</sup>
 
 ## Credits
