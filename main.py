@@ -367,9 +367,8 @@ def main():
         bg[2].position = bg[0].position - DISPLAY.get_height()
         
         pygame.display.update()
-        pygame.time.delay(10)
 
-        clock.tick(60)
+        clock.tick(30)
         pygame.display.set_caption("flappuccino reborn - " + str(round(clock.get_fps())) + " FPS")
 
 if __name__ == "__main__":
