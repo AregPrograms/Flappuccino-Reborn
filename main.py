@@ -7,6 +7,7 @@ from button import Button
 from bean import Bean
 from utils import clamp
 from utils import checkCollisions
+from modmenu import ModMenu
 
 
 def main():
@@ -38,6 +39,7 @@ def main():
     # variables
     rotOffset = -5
     clock = pygame.time.Clock()
+    modMenu = ModMenu()
     # creating a new object player
     player = Player()
     beans = []
@@ -238,7 +240,7 @@ def main():
     # the main game loop
     while True:
         dt = time.time() - last_time
-        dt *= 60
+        dt *= modMenu.config["speed"]
         last_time = time.time()
         # again, get the position
         mouseX,mouseY = pygame.mouse.get_pos()
@@ -248,8 +250,15 @@ def main():
         keys = pygame.key.get_pressed()
         # get events
         for event in pygame.event.get():
-            if event.type==pygame.KEYDOWN and event.key==K_SPACE:
-                jump = True
+            if event.type==pygame.KEYDOWN:
+                if event.key==K_SPACE:
+                    jump = True
+                if event.key == 61:
+                    modMenu.config["speed"]+=5
+                if event.key == 45:
+                    modMenu.config["speed"]-=5
+                    
+                print(event.key)
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 clicked = True
             if clicked and mouseY < DISPLAY.get_height() - 90:
@@ -369,6 +378,9 @@ def main():
         bg[0].position = camOffset + round(player.position.y/DISPLAY.get_height())*DISPLAY.get_height()
         bg[1].position = bg[0].position + DISPLAY.get_height() 
         bg[2].position = bg[0].position - DISPLAY.get_height()
+        
+        modMenu.update(font_20)
+        #DISPLAY.blit(modMenu.frame,(0, 0))
         
         pygame.display.update()
 
