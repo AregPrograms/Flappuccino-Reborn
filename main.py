@@ -13,7 +13,7 @@ def main():
     pygame.init()
     # set the display
     DISPLAY=pygame.display.set_mode((640,480),0,32)
-    pygame.display.set_caption('Flappuccino')
+    pygame.display.set_caption('flappuccino reborn')
     pygame.display.set_icon(Bean().sprite)
     # get fonts
     font = pygame.font.Font('data/fonts/font.otf', 100)
@@ -36,6 +36,7 @@ def main():
     WHITE=(255,255,255) # constant
     # variables
     rotOffset = -5
+    clock = pygame.time.Clock()
     # creating a new object player
     player = Player()
     beans = []
@@ -276,6 +277,9 @@ def main():
         
         pygame.display.update()
         pygame.time.delay(10)
+
+        clock.tick(60)
+        pygame.display.set_caption("flappuccino reborn - " + str(round(clock.get_fps())) + " FPS")
 
 if __name__ == "__main__":
     main()
