@@ -74,7 +74,11 @@ def main():
     splashScreenTimer = 0
     #splash screen
     # playing a sound
+    
     pygame.mixer.Sound.play(flapfx)
+
+    splashScreenTimerLength = 92
+
     while splashScreenTimer < 100:
         dt = time.time() - last_time
         dt *= 60
@@ -106,7 +110,7 @@ def main():
     #reset timer and display
     splashScreenTimer = 0
     pygame.mixer.Sound.play(flapfx)
-    while splashScreenTimer < 100:
+    while splashScreenTimer < splashScreenTimerLength:
         x+=velx
         y+=vely
         dt = time.time() - last_time
@@ -141,7 +145,7 @@ def main():
     #last time
     splashScreenTimer = 0
     pygame.mixer.Sound.play(flapfx)
-    while splashScreenTimer < 100:
+    while splashScreenTimer < splashScreenTimerLength:
         x+=velx
         y+=vely
         dt = time.time() - last_time
