@@ -50,6 +50,9 @@ def main():
     buttons[1].price = 1 
     buttons[2].typeIndicatorSprite = pygame.image.load('data/gfx/beanup_indicator.png')
     buttons[2].price = 1
+    
+    x = 300
+    
     # getting 5 beans
     for i in range(5): beans.append(Bean())
     # now looping through the beans list
@@ -95,10 +98,16 @@ def main():
         # wait for 10 seconds
         pygame.time.delay(10)
 
+    x = 0
     #reset timer and display
     splashScreenTimer = 0
     pygame.mixer.Sound.play(flapfx)
     while splashScreenTimer < 100:
+        if splashScreenTimer > 50:
+            x += (5 + x/25)
+            
+            if x < 0:
+                x = 0
         dt = time.time() - last_time
         dt *= 60
         last_time = time.time()
@@ -115,16 +124,22 @@ def main():
         DISPLAY.fill((255, 77, 77))
         # fill the start message on the top of the game
         startMessage = font_small.render("AREGPROGRAMS", True, (0, 0, 0))
-        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2, DISPLAY.get_height()/2 - startMessage.get_height()/2))
+        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2 - x, DISPLAY.get_height()/2 - startMessage.get_height()/2))
         # update display
         pygame.display.update()
         # wait for 10 seconds
         pygame.time.delay(10)
 
     #last time
+    x = 300
     splashScreenTimer = 0
     pygame.mixer.Sound.play(flapfx)
     while splashScreenTimer < 100:
+        x -= (5 + x/25)
+        
+        if x < 0:
+            x = 0
+        
         dt = time.time() - last_time
         dt *= 60
         last_time = time.time()
@@ -141,7 +156,7 @@ def main():
         DISPLAY.fill((255, 77, 166))
         # fill the start message on the top of the game
         startMessage = font_small.render("JASEDXYZ", True, (255, 255, 255))
-        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2, DISPLAY.get_height()/2 - startMessage.get_height()/2))
+        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2 - x, DISPLAY.get_height()/2 - startMessage.get_height()/2))
         # update display
         pygame.display.update()
         # wait for 10 seconds
