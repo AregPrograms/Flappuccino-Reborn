@@ -257,11 +257,11 @@ def main():
             buttons = []
             for i in range(3): buttons.append(Button())
             buttons[0].typeIndicatorSprite = pygame.image.load('data/gfx/flap_indicator.png')
-            buttons[0].price = 5   
+            buttons[0].price = 1   
             buttons[1].typeIndicatorSprite = pygame.image.load('data/gfx/speed_indicator.png')
-            buttons[1].price = 5 
+            buttons[1].price = 1 
             buttons[2].typeIndicatorSprite = pygame.image.load('data/gfx/beanup_indicator.png')
-            buttons[2].price = 30
+            buttons[2].price = 1
             beans = []
             for i in range(5): beans.append(Bean())
             for bean in beans:
