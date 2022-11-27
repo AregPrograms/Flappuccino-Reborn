@@ -98,16 +98,17 @@ def main():
         # wait for 10 seconds
         pygame.time.delay(10)
 
+    velx=3.1
+    vely=2.95
+
     x = 0
+    y = 0
     #reset timer and display
     splashScreenTimer = 0
     pygame.mixer.Sound.play(flapfx)
     while splashScreenTimer < 100:
-        if splashScreenTimer > 50:
-            x += (5 + x/25)
-            
-            if x < 0:
-                x = 0
+        x+=velx
+        y+=vely
         dt = time.time() - last_time
         dt *= 60
         last_time = time.time()
@@ -121,25 +122,28 @@ def main():
                 sys.exit()
 
         #display a soft red background
-        DISPLAY.fill((255, 77, 77))
+        DISPLAY.fill((240, 105, 84))
         # fill the start message on the top of the game
-        startMessage = font_small.render("AREGPROGRAMS", True, (0, 0, 0))
-        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2 - x, DISPLAY.get_height()/2 - startMessage.get_height()/2))
+        startMessage = font_small.render("AREGPROGRAMS", True, (255, 255, 255))
+        
+        if x+startMessage.get_width() > 640:
+            velx = -velx
+        
+        if y+startMessage.get_height() > 480:
+            vely = -vely
+        
+        DISPLAY.blit(startMessage, (x, y))
         # update display
         pygame.display.update()
         # wait for 10 seconds
         pygame.time.delay(10)
 
     #last time
-    x = 300
     splashScreenTimer = 0
     pygame.mixer.Sound.play(flapfx)
     while splashScreenTimer < 100:
-        x -= (5 + x/25)
-        
-        if x < 0:
-            x = 0
-        
+        x+=velx
+        y+=vely
         dt = time.time() - last_time
         dt *= 60
         last_time = time.time()
@@ -153,10 +157,17 @@ def main():
                 sys.exit()
 
         #display a pink background
-        DISPLAY.fill((255, 77, 166))
+        DISPLAY.fill((192, 55, 230))
         # fill the start message on the top of the game
         startMessage = font_small.render("JASEDXYZ", True, (255, 255, 255))
-        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2 - x, DISPLAY.get_height()/2 - startMessage.get_height()/2))
+        
+        if x < 0:
+            velx = -velx
+        
+        if y < 0:
+            vely = -vely
+        
+        DISPLAY.blit(startMessage, (x, y))
         # update display
         pygame.display.update()
         # wait for 10 seconds
