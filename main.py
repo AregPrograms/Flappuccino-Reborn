@@ -91,6 +91,7 @@ def main():
             if event.type==QUIT:
                 pygame.quit()
                 sys.exit()
+                
 
         DISPLAY.fill((231, 205, 183))
         # fill the start message on the top of the game
@@ -135,6 +136,13 @@ def main():
         
         if y+startMessage.get_height() > 480:
             vely = -vely
+            
+        if x < 0:
+            velx = -velx
+        
+        if y < 0:
+            vely = -vely
+
         
         DISPLAY.blit(startMessage, (x, y))
         # update display
@@ -164,6 +172,12 @@ def main():
         DISPLAY.fill((192, 55, 230))
         # fill the start message on the top of the game
         startMessage = font_small.render("JASEDXYZ", True, (255, 255, 255))
+        
+        if x+startMessage.get_width() > 640:
+            velx = -velx
+        
+        if y+startMessage.get_height() > 480:
+            vely = -vely
         
         if x < 0:
             velx = -velx
