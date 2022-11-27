@@ -34,18 +34,22 @@ def main():
     upgradefx = pygame.mixer.Sound("data/sfx/upgrade.wav")
     beanfx = pygame.mixer.Sound("data/sfx/bean.wav")
     deadfx = pygame.mixer.Sound("data/sfx/dead.wav")
+    cantAffordfx = pygame.mixer.Sound("data/sfx/cantafford.wav")
     # colors
     WHITE=(255,255,255) # constant
     # variables
     rotOffset = -5
     clock = pygame.time.Clock()
     modMenu = ModMenu()
+
     # creating a new object player
     player = Player()
     beans = []
     buttons = []
+
     # adding three buttons
     for i in range(3): buttons.append(Button())
+
     # now simply loading images based off of indexes in the list
     buttons[0].typeIndicatorSprite = pygame.image.load('data/gfx/flap_indicator.png')
     buttons[0].price = 1   
@@ -72,7 +76,7 @@ def main():
     beanMultiplier = 5
     dead = False
     # we need the framerate and then the time
-    framerate = 60
+    #framerate = 60 unused
     last_time = time.time()
     splashScreenTimer = 0
     #splash screen
@@ -349,6 +353,8 @@ def main():
                         for i in range(beanMultiplier):
                             beans.append(Bean())
                             beans[-1].position.xy = random.randrange(0, DISPLAY.get_width() - bean.sprite.get_width()), player.position.y - DISPLAY.get_height() - random.randrange(0, 200)
+                else: #player cant afford upgrade
+                    pygame.mixer.Sound.play(cantAffordfx)
         
         if dead and clicked and checkCollisions(mouseX, mouseY, 3, 3, 4, 4, retry_button.get_width(), retry_button.get_height()):
             health = 100
