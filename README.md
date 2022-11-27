@@ -1,6 +1,48 @@
-# Flappuccino
+# flappuccino reborn
+
+Flappuccino Reborn is an edit of Flappuccino by Polymars created by AregPrograms and jasedxyz. <sup>for fun!</sup>
+
+## Credits
+
+<hr>
+
+- [jasedxyz](https://jased.xyz)
+- AregPrograms
+- [PolyMars](https://polymars.dev/) <sup>for literally making the game</sup>
+
+## Usage
+
+<hr>
+
+### Releases
+In the releases tab, you can download the latest version of the game.
+<sup>(windows only)</sup>
+
+### Running the game from source
+
+<hr>
+
+Download requirements:
+- [Python 3.9+](https://www.python.org/downloads/)
+- [Pygame](https://www.pygame.org/wiki/GettingStarted)
+
+Then, run the game with:
+
+<hr>
+
+#### Windows
+```python .\main.py```
+
+<hr>
+
+#### Unix
+```python3 ./main.py```
+
+
+# Flappuccino 
 
 Flappuccino is a game created in 48 hours for the [PyGame Community New Years Jam](https://itch.io/jam/pygame-community-jam) using Python with [Pygame](https://www.pygame.org). 
+
 ## Screenshots
 ![](https://img.itch.zone/aW1hZ2UvODg3MDQ0LzUwMDQzOTkuZ2lm/original/vd0wHu.gif) 
 
@@ -19,7 +61,7 @@ Grab the latest release of Python from [here](https://www.python.org/downloads/)
 2. Mac: 
 ``python3 -m pip install pygame``
 3. Linux:
-Same as windows.
+``python -m pip install pygame``
 
 Ensure ``main.py`` is in the same directory as ``./data`` and execute  ``python main.py``.
 
