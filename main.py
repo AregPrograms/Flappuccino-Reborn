@@ -88,12 +88,60 @@ def main():
         DISPLAY.fill((231, 205, 183))
         # fill the start message on the top of the game
         startMessage = font_small.render("POLYMARS", True, (171, 145, 123))
-        startMessage2 = font_small.render("AREGPROGRAMS", True, (171, 145, 123))
-        startMessage3 = font_small.render("JASED-0001", True, (171, 145, 123))
         DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2, DISPLAY.get_height()/2 - startMessage.get_height()/2))
-        DISPLAY.blit(startMessage2, (DISPLAY.get_width()/2 - startMessage.get_width()/2, (DISPLAY.get_height()/2 - startMessage.get_height()/2)+startMessage.get_height()))
-        DISPLAY.blit(startMessage3, (DISPLAY.get_width()/2 - startMessage.get_width()/2, (DISPLAY.get_height()/2 - startMessage.get_height()/2)+startMessage.get_height()+startMessage3.get_height()))
-            
+
+        # update display
+        pygame.display.update()
+        # wait for 10 seconds
+        pygame.time.delay(10)
+
+    #reset timer and display
+    splashScreenTimer = 0
+    pygame.mixer.Sound.play(flapfx)
+    while splashScreenTimer < 100:
+        dt = time.time() - last_time
+        dt *= 60
+        last_time = time.time()
+
+        splashScreenTimer += dt
+
+        for event in pygame.event.get():
+            # if the user clicks the button
+            if event.type==QUIT:
+                pygame.quit()
+                sys.exit()
+
+        #display a soft red background
+        DISPLAY.fill((255, 77, 77))
+        # fill the start message on the top of the game
+        startMessage = font_small.render("AREGPROGRAMS", True, (0, 0, 0))
+        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2, DISPLAY.get_height()/2 - startMessage.get_height()/2))
+        # update display
+        pygame.display.update()
+        # wait for 10 seconds
+        pygame.time.delay(10)
+
+    #last time
+    splashScreenTimer = 0
+    pygame.mixer.Sound.play(flapfx)
+    while splashScreenTimer < 100:
+        dt = time.time() - last_time
+        dt *= 60
+        last_time = time.time()
+
+        splashScreenTimer += dt
+
+        for event in pygame.event.get():
+            # if the user clicks the button
+            if event.type==QUIT:
+                pygame.quit()
+                sys.exit()
+
+        #display a pink background
+        DISPLAY.fill((255, 77, 166))
+        # fill the start message on the top of the game
+        startMessage = font_small.render("JASEDXYZ", True, (255, 255, 255))
+        DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2, DISPLAY.get_height()/2 - startMessage.get_height()/2))
         # update display
         pygame.display.update()
         # wait for 10 seconds
