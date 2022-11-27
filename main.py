@@ -240,7 +240,6 @@ def main():
                     if (buttons.index(button) == 1):
                         player.velocity.x *= 1.5
                     if (buttons.index(button) == 2):
-                        oldBeanMultipler = beanMultiplier
                         beanMultiplier += 10
                         for i in range(beanMultiplier):
                             beans.append(Bean())

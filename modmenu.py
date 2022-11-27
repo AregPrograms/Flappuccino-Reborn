@@ -1,0 +1,2 @@
+class ModMenu:
+    pass
