@@ -18,6 +18,7 @@ def main():
     # get fonts
     font = pygame.font.Font('data/fonts/font.otf', 100)
     font_small = pygame.font.Font('data/fonts/font.otf', 32)
+    font_title_desc = pygame.font.Font('data/fonts/font.otf', 16)
     font_20 = pygame.font.Font('data/fonts/font.otf', 20)
     # get some images
     shop = pygame.image.load('data/gfx/shop.png')
@@ -96,7 +97,9 @@ def main():
         DISPLAY.fill((231, 205, 183))
         # fill the start message on the top of the game
         startMessage = font_small.render("POLYMARS", True, (171, 145, 123))
+        descMessage = font_title_desc.render("ORIGINAL DEVELOPER", True, (171, 145, 123))
         DISPLAY.blit(startMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2, DISPLAY.get_height()/2 - startMessage.get_height()/2))
+        DISPLAY.blit(descMessage, (DISPLAY.get_width()/2 - startMessage.get_width()/2, DISPLAY.get_height()/2 - startMessage.get_height()/2 + startMessage.get_height()))
 
         # update display
         pygame.display.update()
@@ -130,6 +133,7 @@ def main():
         DISPLAY.fill((240, 105, 84))
         # fill the start message on the top of the game
         startMessage = font_small.render("AREGPROGRAMS", True, (255, 255, 255))
+        descMessage = font_title_desc.render("REBORN DEVELOPER", True, (255, 255, 255))
         
         if x+startMessage.get_width() > 640:
             velx = -velx
@@ -145,6 +149,7 @@ def main():
 
         
         DISPLAY.blit(startMessage, (x, y))
+        DISPLAY.blit(descMessage, (x, y+startMessage.get_height()))
         # update display
         pygame.display.update()
         # wait for 10 seconds
@@ -172,6 +177,7 @@ def main():
         DISPLAY.fill((192, 55, 230))
         # fill the start message on the top of the game
         startMessage = font_small.render("JASEDXYZ", True, (255, 255, 255))
+        descMessage = font_title_desc.render("REBORN DEVELOPER", True, (255, 255, 255))
         
         if x+startMessage.get_width() > 640:
             velx = -velx
@@ -186,6 +192,7 @@ def main():
             vely = -vely
         
         DISPLAY.blit(startMessage, (x, y))
+        DISPLAY.blit(descMessage, (x, y+startMessage.get_height()))
         # update display
         pygame.display.update()
         # wait for 10 seconds
@@ -271,14 +278,11 @@ def main():
         DISPLAY.blit(shop, (0, 0))
         
         for button in buttons:
-            DISPLAY.blit(button.sprite, (220 + (buttons.index(button)*125), 393))
-            priceDisplay = font_small.render(str(button.price), True, (0,0,0))
-            DISPLAY.blit(priceDisplay, (262 + (buttons.index(button)*125), 408))
-            levelDisplay = font_20.render('Lvl. ' + str(button.level), True, (200,200,200))
-            DISPLAY.blit(levelDisplay, (234 + (buttons.index(button)*125), 441))
-            DISPLAY.blit(button.typeIndicatorSprite, (202 + (buttons.index(button)*125), 377))
+            button.draw(DISPLAY, buttons, font_small, font_20)
+            
         beanCountDisplay = font_small.render(str(beanCount).zfill(7), True, (0,0,0))
         DISPLAY.blit(beanCountDisplay, (72, 394))
+        
         if dead:
             DISPLAY.blit(retry_button, (4, 4))
             deathMessage = font_small.render("RETRY", True, (0, 0, 0))
