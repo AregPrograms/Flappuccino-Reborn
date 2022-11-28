@@ -9,8 +9,8 @@ Flappuccino Reborn is an edit of Flappuccino by Polymars created by AregPrograms
 
 <hr>
 
+- [AregPrograms](https://github.com/AregPrograms)
 - [jasedxyz](https://jased.xyz)
-- AregPrograms
 - [PolyMars](https://polymars.dev/) <sup>for literally making the game</sup>
 
 ## Usage
