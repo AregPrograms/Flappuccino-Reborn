@@ -16,9 +16,9 @@ def main():
     # set the display
     DISPLAY=pygame.display.set_mode((640,480),0,32)
     pygame.display.set_caption('flappuccino reborn')
-    pygame.display.set_icon(Bean().sprite)
+    pygame.display.set_icon(pygame.image.load('data/gfx/player.png'))
 
-    # asset loading
+    # pre-load assets
 
     # get fonts
     font = pygame.font.Font('data/fonts/font.otf', 100)
@@ -26,7 +26,7 @@ def main():
     font_title_desc = pygame.font.Font('data/fonts/font.otf', 16)
     font_20 = pygame.font.Font('data/fonts/font.otf', 20)
 
-    # get some images
+    # images
     shop = pygame.image.load('data/gfx/shop.png')
     shop_bg = pygame.image.load('data/gfx/shop_bg.png')
     retry_button = pygame.image.load('data/gfx/retry_button.png')
@@ -43,10 +43,6 @@ def main():
     cantAffordfx = pygame.mixer.Sound("data/sfx/cantafford.wav")
 
 
-
-    # colors
-    WHITE=(255,255,255) # constant
-
     # variables
     rotOffset = -5
     clock = pygame.time.Clock()
@@ -57,6 +53,15 @@ def main():
     player = Player()
     beans = []
     buttons = []
+
+    # some more variables
+    beanCount = 0
+    startingHeight = player.position.y
+    height = 0
+    health = 100
+    flapForce = 3
+    beanMultiplier = 5
+    dead = False
 
     # adding three buttons
     for i in range(3): buttons.append(Button())
@@ -73,26 +78,21 @@ def main():
     
     # getting 5 beans
     for i in range(5): beans.append(Bean())
+
     # now looping through the beans list
     for bean in beans:
         bean.position.xy = random.randrange(0, DISPLAY.get_width() - bean.sprite.get_width()), beans.index(bean)*-200 - player.position.y
+    
     # creating a list of backgrounds, with each index being an object
     bg = [Background(), Background(), Background()]
-    # some variables that we need
-    beanCount = 0
-    startingHeight = player.position.y
-    height = 0
-    health = 100
-    flapForce = 3
-    beanMultiplier = 5
-    dead = False
+
     # we need the framerate and then the time
     #framerate = 60 unused
     last_time = time.time()
     splashScreenTimer = 0
+
     #splash screen
     # playing a sound
-    
     pygame.mixer.Sound.play(flapfx)
 
     splashScreenTimerLength = 92
@@ -126,8 +126,8 @@ def main():
     velx=3.1
     vely=2.95
 
-    x = 0
-    y = 0
+    x, y = 0,0 
+
     #reset timer and display
     splashScreenTimer = 0
     pygame.mixer.Sound.play(flapfx)
@@ -148,27 +148,23 @@ def main():
 
         #display a soft red background
         DISPLAY.fill((240, 105, 84))
+
         # fill the start message on the top of the game
         startMessage = font_small.render("AREGPROGRAMS", True, (255, 255, 255))
         descMessage = font_title_desc.render("REBORN DEVELOPER", True, (255, 255, 255))
         
-        if x+startMessage.get_width() > 640:
-            velx = -velx
-        
-        if y+startMessage.get_height() > 480:
-            vely = -vely
+        if x+startMessage.get_width() > 640: velx = -velx
+        if y+startMessage.get_height() > 480: vely = -vely
             
-        if x < 0:
-            velx = -velx
-        
-        if y < 0:
-            vely = -vely
-
+        if x < 0: velx = -velx
+        if y < 0: vely = -vely
         
         DISPLAY.blit(startMessage, (x, y))
         DISPLAY.blit(descMessage, (x, y+startMessage.get_height()))
+
         # update display
         pygame.display.update()
+
         # wait for 10 seconds
         pygame.time.delay(10)
 
@@ -192,21 +188,16 @@ def main():
 
         #display a pink background
         DISPLAY.fill((192, 55, 230))
+
         # fill the start message on the top of the game
         startMessage = font_small.render("JASEDXYZ", True, (255, 255, 255))
         descMessage = font_title_desc.render("REBORN DEVELOPER", True, (255, 255, 255))
         
-        if x+startMessage.get_width() > 640:
-            velx = -velx
+        if x+startMessage.get_width() > 640: velx = -velx
+        if y+startMessage.get_height() > 480: vely = -vely
         
-        if y+startMessage.get_height() > 480:
-            vely = -vely
-        
-        if x < 0:
-            velx = -velx
-        
-        if y < 0:
-            vely = -vely
+        if x < 0: velx = -velx
+        if y < 0: vely = -vely
         
         DISPLAY.blit(startMessage, (x, y))
         DISPLAY.blit(descMessage, (x, y+startMessage.get_height()))
@@ -246,7 +237,7 @@ def main():
             pygame.mixer.Sound.play(upgradefx)
             titleScreen = False
 
-        DISPLAY.fill(WHITE)
+        DISPLAY.fill((255, 255, 255))
         DISPLAY.blit(title_bg, (0,0)) 
         DISPLAY.blit(shadow, (0,0)) 
         DISPLAY.blit(logo, (DISPLAY.get_width()/2 - logo.get_width()/2, DISPLAY.get_height()/2 - logo.get_height()/2 + math.sin(time.time()*5)*5 - 25)) 
@@ -286,6 +277,9 @@ def main():
                 
                 if event.key == 1073741882: #F1
                     modMenu.config["freeUpgrades"] = not modMenu.config["freeUpgrades"]
+                if event.key == 1073741883: #F2
+                    modMenu.config["noHealth"] = not modMenu.config["noHealth"]
+
                 if event.key == 13: #enter
                     showModMenu = not showModMenu
                     
@@ -300,7 +294,7 @@ def main():
         
         camOffset = -player.position.y + DISPLAY.get_height()/2 - player.currentSprite.get_size()[1]/2
         
-        DISPLAY.fill(WHITE)
+        DISPLAY.fill((255, 255, 255))
         for o in bg:
             o.setSprite(((player.position.y/50) % 100) / 100)
             DISPLAY.blit(o.sprite, (0, o.position))
@@ -348,8 +342,10 @@ def main():
         player.position.y += player.velocity.y*dt
         player.velocity.y = clamp(player.velocity.y + player.acceleration*dt, -99999999999, 50)
 
-        health -= 0.2 * dt
-        if health <= 0 and not dead:
+        if not modMenu.config["noHealth"]: health -= 0.2 * dt
+        else: health = 100
+
+        if health <= 0 and not dead and not modMenu.config["noHealth"]:
             dead = True
             pygame.mixer.Sound.play(deadfx)
 
@@ -366,20 +362,24 @@ def main():
                 bean.position.y -= DISPLAY.get_height() - random.randrange(0, 200)
                 bean.position.x = random.randrange(0, DISPLAY.get_width() - bean.sprite.get_width())
 
+        # upgrade button logic
         for button in buttons:
             buttonX,buttonY = 220 + (buttons.index(button)*125), 393
 
             if modMenu.config["freeUpgrades"]: button.price = 0
             else: pass
-
+            
+            #if mouse was clicked, player is alive, and the mouse was in the button
             if clicked and not dead and checkCollisions(mouseX, mouseY, 3, 3, buttonX, buttonY, button.sprite.get_width(), button.sprite.get_height()):
+                #check if player has enough beans
                 if (beanCount >= button.price):
+                    if modMenu.config["freeUpgrades"]: button.price = 0
+                    else: pass
+
+                    #if so, subtract the price from the bean count
                     pygame.mixer.Sound.play(upgradefx)
                     button.level += 1
                     beanCount -= button.price
-
-                    if modMenu.config["freeUpgrades"]: button.price = 0
-                    else: pass
 
                     if button.price == 0 and not modMenu.config["freeUpgrades"]: button.price = 5 #reset price if player disabled free upgrades
 
@@ -444,11 +444,14 @@ def main():
         if showModMenu: DISPLAY.blit(modMenu.frame,(0, 0))
         elif not showModMenu: pass
         else: showModMenu = False # again, just in case ;)
+
+        if dead and not modMenu.config["noHealth"]: pass
+        elif dead and modMenu.config["noHealth"]: health = 100
         
         pygame.display.update()
 
         clock.tick(30)
-        pygame.display.set_caption("flappuccino reborn - " + str(round(clock.get_fps())) + " FPS")
+        pygame.display.set_caption("flappuccino reborn /\\ " + str(round(clock.get_fps())) + " FPS /\\ " + str(clock.get_time()) + " MS delta")
 
 if __name__ == "__main__":
     main()

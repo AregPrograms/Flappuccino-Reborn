@@ -5,7 +5,8 @@ class ModMenu:
         self.frame = pygame.Surface((200, 250), pygame.SRCALPHA)
         self.config = {
             "speed":  60,
-            "freeUpgrades": False
+            "freeUpgrades": False,
+            "noHealth": False 
         }
         
     def update(self, font: pygame.font.Font):
@@ -33,6 +34,13 @@ class ModMenu:
         self.frame.blit(fUp, (100 - (fUp.get_width()/2), 50 - (fUp.get_height()/2)))
         self.frame.blit(fUpHotkey, (100 - (fUpHotkey.get_width()/2), 70 - (fUpHotkey.get_height()/2)))
 
+        # No Health Code
+        if self.config["noHealth"]: nH = font.render("No Health", True, green)
+        elif not self.config["noHealth"]: nH = font.render("No Health", True, red)
+        else: self.config["noHealth"] = False # just in case
 
+        #render hotkey
+        nHHotkey = font.render("F2", True, (255, 255, 255))
 
-        #get hotkeys
+        self.frame.blit(nH, (100 - (nH.get_width()/2), 100 - (nH.get_height()/2)))
+        self.frame.blit(nHHotkey, (100 - (nHHotkey.get_width()/2), 120 - (nHHotkey.get_height()/2)))
