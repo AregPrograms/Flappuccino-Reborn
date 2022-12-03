@@ -451,7 +451,7 @@ def main():
         pygame.display.update()
 
         clock.tick(30)
-        pygame.display.set_caption("flappuccino reborn | " + str(round(clock.get_fps())) + " FPS /\\ " + str(clock.get_time()) + " MS delta")
+        pygame.display.set_caption("flappuccino reborn | " + str(round(clock.get_fps())) + " FPS | " + str(clock.get_time()) + " MS delta")
 
 if __name__ == "__main__":
     main()
