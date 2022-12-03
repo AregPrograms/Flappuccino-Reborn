@@ -275,9 +275,11 @@ def main():
                 if event.key == 45: #- key
                     modMenu.config["speed"]-=5
                 
-                if event.key == 1073741882: #F1
+                if event.key == 113: #q
                     modMenu.config["freeUpgrades"] = not modMenu.config["freeUpgrades"]
-                if event.key == 1073741883: #F2
+                    for button in buttons:
+                        if button.price == 0 and not modMenu.config["freeUpgrades"]: button.price = 5 #reset price if player disabled free upgrades
+                if event.key == 101: #e
                     modMenu.config["noHealth"] = not modMenu.config["noHealth"]
 
                 if event.key == 13: #enter
